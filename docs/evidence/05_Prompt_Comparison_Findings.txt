@@ -1,0 +1,67 @@
+Prompt Optimizer — Manual Prompt Comparison
+
+Platform: Claude
+Test language: Portuguese
+Method: The original and revised prompts were submitted in separate
+conversations. The revised prompt incorporated requirements clarified
+by participant P01.
+
+Original prompt outcome:
+Claude explained Brazilian NRs and API standards and provided examples.
+The response did not produce a clause-by-clause comparison table or
+identify a reference date and source revisions.
+
+Revised prompt outcome:
+Claude produced a PDF organized by API standard and clause. It covered
+NRs 10, 12, and 13 before addressing selected additional NRs. The PDF
+included the reference date (2026-11-11), source editions and revisions,
+and separate sections for cases with no identified counterpart and
+cases where direct comparison was unavailable.
+
+Limitations:
+The response did not document a review of all remaining Brazilian NRs.
+Some API clause references were based on older editions or secondary
+sources and were marked accordingly. Technical accuracy was not
+independently verified in this test.
+
+Finding:
+In this case, clarifying the task, scope, format, and reference date
+helped elicit a response better aligned with the participant's request.
+This manual comparison did not measure token savings or test the
+application itself.
+
+Participant assessment of the generated responses:
+P01 preferred Response B because it better met her needs. She found
+it incomplete because it did not list all Brazilian Regulatory
+Standards (NRs). The test did not establish why the coverage was
+incomplete.
+
+Design implication:
+For requests that require complete coverage, the optimized prompt
+should ask for a coverage checklist. Each requested item should be
+marked as reviewed with a match, reviewed with no match identified,
+or pending review.
+
+Design requirement: Confirm user intent before generating the answer.
+
+When a request leaves the intended deliverable or scope unclear,
+the assistant asks a focused question. It then presents the optimized
+request as a confirmation question, preserving the user's goal,
+priorities, output format, and constraints.
+
+If the user confirms, the assistant generates the answer using the
+confirmed prompt without asking the user to repeat the request.
+If the user declines, the assistant asks what should change, uses
+the additional context to revise the prompt, and requests confirmation
+again before generating the answer.
+
+Acceptance test:
+Given an ambiguous request, the assistant asks for clarification and
+presents its revised understanding. If the user corrects a detail,
+the next confirmation reflects that correction. Once the user
+confirms, the answer is generated from the latest confirmed prompt.
+
+Evidence:
+The P01 review illustrated how feedback clarified the comparison
+direction, priority standards, format, and reference date. The
+automated confirmation flow remains to be tested in the application.

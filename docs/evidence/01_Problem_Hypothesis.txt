@@ -1,0 +1,49 @@
+Working title: Prompt Optimizer
+
+Target user:
+Occupational safety technicians in Brazil who have limited experience
+writing prompts and use AI chat tools for work-related research.
+
+Observed example:
+An occupational safety technician described Brazilian Regulatory
+Standards (NRs) and mentioned American Petroleum Institute (API)
+standards in an AI prompt. She provided context but left the expected
+deliverable implicit.
+
+User's intended result:
+Use API standards as the starting point for identifying comparable
+requirements in Brazilian NRs. Where a direct comparison is possible,
+explain which requirement is more restrictive and why.
+
+Scope clarification:
+Prioritize NRs 10, 12, and 13, then review all remaining Brazilian NRs
+to provide a comprehensive reference. The participant requested a concise
+table and a reference date for the comparison.
+
+Problem hypothesis:
+When users describe a topic without specifying the deliverable, they
+may receive an answer that misses their intended task, leading to
+revisions and repeated requests.
+
+Proposed AI capability:
+When the intended task is unclear, ask a focused clarification question.
+Then rewrite the prompt using the user's confirmed goal, scope, and
+constraints. Display the original and rewritten prompts side by side
+with estimated input token counts for the same reference model.
+
+Proposed optimized prompt:
+Create a concise comparison table organized by API standard and clause.
+Start with API standards relevant to Brazilian NRs 10, 12, and 13.
+Then review all remaining Brazilian NRs for comparable requirements.
+
+Use one row per pair of directly comparable requirements. Include the
+API standard and clause, the corresponding NR and clause, which
+requirement is more restrictive, and a brief reason. Use "Equivalent"
+when neither requirement is more restrictive. Distinguish cases where
+no counterpart was identified from cases where the requirements are
+not directly comparable.
+
+Use 2026-11-11 as the reference date for the comparison. Identify the
+edition or revision used for each API standard and Brazilian NR.
+If an edition or revision cannot be verified as of that date, mark it
+as "Unverified" in the table.

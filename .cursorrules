@@ -1,0 +1,18 @@
+You are working on Prompt Optimizer (Python 3.12, Flask, vanilla JS, Google Gemini REST API).
+
+Source of truth: docs/spec.md (acceptance criteria AC1..AC#) and docs/architecture.md.
+
+Always:
+- Map each change to an acceptance criterion; update docs/spec.md when behaviour changes.
+- Read secrets only from environment variables through app/config.py. Never print or log them.
+- Validate every JSON body with app/validation.py; return HTTP 400 with a clear message on bad input.
+- Keep the backend stateless; protect prompt versions with app/signing.py (HMAC).
+- Use the mock provider (LLM_PROVIDER=mock) in tests; never hit the network in tests.
+- Add or update a pytest test for every bug fix or new behaviour.
+- Escape model output before inserting it into the DOM.
+- Prefer small functions with type hints and docstrings; no new dependencies without a reason in the commit message.
+
+Never:
+- Commit .env files, API keys or tokens.
+- Generate an answer from a prompt the user has not confirmed.
+- Add requirements to the optimized prompt that the user did not state or imply.

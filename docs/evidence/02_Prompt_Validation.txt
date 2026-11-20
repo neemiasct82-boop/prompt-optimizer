@@ -1,0 +1,43 @@
+Participant: P01, occupational safety technician
+Date: 2026-11-11
+Method: Side-by-side review of the original and rewritten prompts.
+
+Expected AI response:
+The participant wanted a direct and concise comparison, with clear
+wording that would avoid confusion when she used the information.
+
+Intent match: Partial.
+The participant said the rewrite did not exactly match what she
+had written, which was less precise. Reading the rewrite helped
+her recognize that the original request was unclear and unlikely
+to produce a complete comparison.
+
+What improved:
+The participant appreciated that the rewrite explicitly prioritized
+NRs 10, 12, and 13 while retaining the remaining NRs for reference.
+
+Change informed by feedback:
+Ask for a concise, clearly structured comparison with one row per
+comparable requirement and a short explanation of each finding.
+
+Evidence scope:
+This review evaluated the wording of the prompt. The quality of
+the generated answer was not evaluated in this session.
+
+Present the comparison in a concise table organized by API standard.
+For each directly comparable requirement, show the corresponding NR 
+requirement, which is more restrictive, and a brief reason. 
+Mark cases where a direct comparison is unavailable.
+
+Follow-up feedback from P01:
+The participant approved the proposed table format and asked for an
+explicit comparison date because the information may change over time.
+
+Change informed by feedback:
+Add a reference date to the optimized prompt and ask the answering AI
+to identify the editions or revisions it used.
+
+Acceptance criterion:
+Given a standards comparison request with a user-specified reference
+date, the optimized prompt explicitly retains that date and requests
+the editions or revisions used.
