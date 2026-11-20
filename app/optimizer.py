@@ -71,7 +71,9 @@ cannot verify a fact as of the requested reference date, say so explicitly."""
 
 _DATE_ISO = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
 _DATE_BR = re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b")
-_EDITION_WORDS = re.compile(r"edi[cç][aã]o|edi[cç][oõ]es|revis[aã]o|revis[oõ]es|edition|revision", re.I)
+# "revisão"/"revision" alone is ambiguous (e.g. "revisão pendente" in the coverage checklist),
+# so only edition wording counts as already requesting the editions used.
+_EDITION_WORDS = re.compile(r"edi[cç][aã]o|edi[cç][oõ]es|edition", re.I)
 _FULL_COVERAGE = re.compile(
     r"\b(todas as|todos os|demais|all (the )?(remaining )?|every|complete coverage|cobertura completa)\b",
     re.I,

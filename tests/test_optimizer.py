@@ -41,6 +41,13 @@ def test_reference_date_guard_keeps_prompt_that_already_complies():
     assert optimizer.ensure_reference_date(prompt, [dt.date(2026, 11, 11)], portuguese=False) == prompt
 
 
+def test_checklist_wording_does_not_count_as_edition_request():
+    # Regression: "revisão pendente" in the coverage checklist hid the missing edition request.
+    prompt = 'Crie uma tabela. Use 2026-11-11 como data de referência. Marque "revisão pendente".'
+    out = optimizer.ensure_reference_date(prompt, [dt.date(2026, 11, 11)], portuguese=True)
+    assert "edição ou revisão de cada norma" in out
+
+
 def test_no_date_means_no_change():
     assert optimizer.ensure_reference_date("Prompt", [], portuguese=True) == "Prompt"
 
