@@ -50,6 +50,8 @@ Stateless server, no database. Details: [`docs/architecture.md`](docs/architectu
 | `app/signing.py` | HMAC signatures for prompt versions |
 | `app/monitoring.py` | Request logs, `/api/stats` counters, rate limiter |
 | `app/routes.py` | UI page and API endpoints |
+| `docs/validation-report.md` | Idea Validation Report (7 steps, evidence, sources) |
+| `docs/prd.md` | One-page PRD |
 | `docs/spec.md` | Spec v1.1 with acceptance criteria AC1–AC10 ([review notes](docs/spec-review.md)) |
 | `CLAUDE.md`, `.cursorrules` | Instructions for AI coding assistants |
 
@@ -79,7 +81,7 @@ Without `GEMINI_API_KEY` the app runs with a deterministic **mock** model and sh
 ## Tests and CI
 
 ```bash
-pytest -q          # 42 tests, no network
+pytest -q          # 43 tests, no network
 ruff check .
 ```
 
