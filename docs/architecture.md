@@ -13,18 +13,18 @@
 ## Data flow
 
 ```
-Browser                         Flask API                         Gemini
-  │ 1. request text  ───────────▶ POST /api/analyze ─────────────▶ generateContent (JSON mode)
-  │                               validate → rate-limit            ◀── {status: clarify | confirm}
-  │ ◀── clarify: one question ─── (if clarify)
-  │ 2. answer        ───────────▶ POST /api/analyze (with answers)
-  │ ◀── confirm: paraphrase,  ─── deterministic guards ──────────▶ countTokens (original, optimized)
-  │     optimized prompt v1,      sign(version, prompt)
-  │     token counts, signature
-  │ 3a. "No, change X" ─────────▶ POST /api/revise  (verify signature) ─▶ generateContent
-  │ ◀── confirm v2 + signature ──
-  │ 3b. "Yes" ──────────────────▶ POST /api/generate (verify signature) ─▶ generateContent (answer)
-  │ ◀── answer + version used ───
+Browser (state)          Flask API (stateless)              Gemini API
+---------------          ---------------------              ----------
+1  request text   --->   POST /api/analyze                  
+                         validate, rate-limit   --->        generateContent (JSON)
+   <--- clarify: one question
+2  answer         --->   POST /api/analyze (+answers) --->  generateContent (JSON)
+                         guards (date, checklist)  --->     countTokens x2
+   <--- confirm: paraphrase, prompt v1, tokens, signature
+3a "No, change X" --->   POST /api/revise  (verify sig) --> generateContent (JSON)
+   <--- confirm: prompt v2 + new signature
+3b "Yes"          --->   POST /api/generate (verify sig) -> generateContent (answer)
+   <--- answer + version used
 ```
 
 ## Key design decisions
