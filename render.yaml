@@ -1,0 +1,22 @@
+# Render Blueprint: New > Blueprint > connect this repo.
+services:
+  - type: web
+    name: prompt-optimizer
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # One worker keeps the in-memory rate limit and stats exact; threads handle concurrency.
+    startCommand: gunicorn wsgi:app --preload --workers 1 --threads 8 --timeout 200 --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash
+      - key: GEMINI_API_KEY
+        sync: false        # set in the Render dashboard; never committed
+      - key: APP_SECRET
+        generateValue: true
