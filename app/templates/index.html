@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Optimizer — clarify before you ask</title>
+  <meta name="description" content="Turns an unclear request into a confirmed, precise prompt before the AI answers.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">◆</span>
+        <div>
+          <h1>Prompt Optimizer</h1>
+          <p class="tagline">Clarify the request, confirm the prompt, then get the answer.</p>
+        </div>
+      </div>
+      {% if provider == 'mock' %}
+      <span class="badge warn" title="No API key configured: answers come from a mock model">Demo mode (mock AI)</span>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="wrap">
+    <ol class="steps" aria-label="Progress">
+      <li data-step="request" class="active">1 · Request</li>
+      <li data-step="clarify">2 · Clarify</li>
+      <li data-step="confirm">3 · Confirm</li>
+      <li data-step="answer">4 · Answer</li>
+    </ol>
+
+    <section id="card-request" class="card">
+      <label for="request" class="label">What do you need from the AI?</label>
+      <p class="hint">Write as you normally would, in Portuguese or English. If something is unclear,
+        the app asks one question at a time before writing the prompt.</p>
+      <textarea id="request" rows="6" maxlength="4000"
+        placeholder="Ex.: Quero comparar as normas API com as NRs brasileiras, principalmente NR-10, NR-12 e NR-13."></textarea>
+      <div class="row">
+        <span class="counter" id="request-count">0 / 4000</span>
+        <button id="btn-analyze" class="primary">Analyze request</button>
+      </div>
+    </section>
+
+    <section id="card-clarify" class="card hidden" aria-live="polite">
+      <div class="card-head">
+        <h2>One question before I write the prompt</h2>
+        <span class="badge" id="clarify-round"></span>
+      </div>
+      <p id="clarify-question" class="question"></p>
+      <div id="clarify-options" class="chips"></div>
+      <textarea id="clarify-answer" rows="3" maxlength="1000" placeholder="Your answer"></textarea>
+      <div class="row">
+        <button id="btn-restart-1" class="ghost">Start over</button>
+        <button id="btn-answer" class="primary">Send answer</button>
+      </div>
+    </section>
+
+    <section id="card-confirm" class="card hidden" aria-live="polite">
+      <div class="card-head">
+        <h2>Did I understand correctly?</h2>
+        <span class="badge" id="confirm-version"></span>
+      </div>
+      <p id="confirm-paraphrase" class="question"></p>
+      <ul id="confirm-assumptions" class="assumptions hidden"></ul>
+
+      <div class="compare">
+        <div class="pane">
+          <div class="pane-head"><h3>Original request</h3><span class="tokens" id="tok-original"></span></div>
+          <pre id="cmp-original" class="prompt"></pre>
+        </div>
+        <div class="pane">
+          <div class="pane-head"><h3>Optimized prompt</h3><span class="tokens" id="tok-optimized"></span></div>
+          <pre id="cmp-optimized" class="prompt"></pre>
+          <button id="btn-copy-prompt" class="link">Copy optimized prompt</button>
+        </div>
+      </div>
+      <p class="hint" id="tok-note"></p>
+
+      <div class="row">
+        <button id="btn-no" class="secondary">No, change something</button>
+        <button id="btn-yes" class="primary">Yes, generate the answer</button>
+      </div>
+      <div id="revise-box" class="hidden">
+        <label for="revise-feedback" class="label">What should change?</label>
+        <textarea id="revise-feedback" rows="3" maxlength="1000"
+          placeholder="Ex.: Use 2026-11-11 como data de referência e organize por norma API."></textarea>
+        <div class="row">
+          <button id="btn-cancel-revise" class="ghost">Cancel</button>
+          <button id="btn-revise" class="primary">Revise prompt</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="card-answer" class="card hidden" aria-live="polite">
+      <div class="card-head">
+        <h2>Answer</h2>
+        <span class="badge ok" id="answer-version"></span>
+      </div>
+      <div id="answer" class="answer"></div>
+      <div class="row">
+        <button id="btn-copy-answer" class="link">Copy answer</button>
+        <span class="spacer"></span>
+        <button id="btn-download-log" class="ghost">Download session log</button>
+        <button id="btn-restart-2" class="primary">New request</button>
+      </div>
+    </section>
+
+    <div id="status" class="status hidden" role="status"></div>
+
+    <details class="card timeline-card">
+      <summary>Session timeline</summary>
+      <ol id="timeline" class="timeline"></ol>
+    </details>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Answers are AI-generated and may be wrong or outdated. Check standards and regulations against
+      official sources before use. Requests are processed by the Google Gemini API and are not stored by this app.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
