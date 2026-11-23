@@ -1,4 +1,4 @@
-# Spec review — v1.0 → v1.1
+# Spec review — v1.0 → v1.1 → v1.2
 
 Date: 2026-11-20 · Method: line-by-line review of `spec.md` v1.0 against the
 evidence files, the architecture notes and the Graded Assignment 4.2 brief.
@@ -13,3 +13,10 @@ Each finding was resolved in spec v1.1.
 | R5 | AC5 did not say what happens when the token-count API fails. | Edge-case review | Fallback to a character-based estimate, labelled as an estimate (**AC5**). |
 | R6 | AC6 said "over the limit" without numbers, so it was not testable. | Testability | Limits defined in section 4 and referenced by **AC6**. |
 | R7 | Rate limiting and monitoring appeared in the architecture notes but not in the spec. | Brief, Phase 3–4 | Added to constraints; new **AC9** (rate limit) and **AC10** (stats and health endpoints). |
+
+## v1.1 → v1.2 — findings from the live test with P01 (2026-11-23)
+
+| # | Observation in the deployed app | Evidence | Change |
+|---|---|---|---|
+| L1 | In session 1 the answer was cut off mid-row at "NR-38" (13,635 characters); the user was not told it was incomplete. | `docs/evidence/live-test/session-1-confirm.json` | Detect `finishReason = MAX_TOKENS`, return `truncated`, warn in the UI, count it in `/api/stats`; raise the answer limit from 8,192 to 16,384 tokens. New **AC11**. |
+| L2 | The optimized prompt asked for the coverage checklist twice: once in the model's own words ("lista de verificação de cobertura") and once from the guard. | Same file, `confirmed_prompt` | Guard now recognises Portuguese and English checklist wording and the status labels before appending (**AC8**). |

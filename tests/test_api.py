@@ -124,3 +124,25 @@ def test_gemini_count_tokens_falls_back_to_estimate(monkeypatch):
     monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(500, {"error": {"message": "boom"}}))
     llm = GeminiClient("KEY", "gemini-test", "https://example.test/v1beta")
     assert llm.count_tokens("abcdefgh") == (2, "estimate")  # AC5 fallback
+
+
+def test_answer_cut_by_length_limit_is_flagged(client, app, monkeypatch):
+    """AC11 (live test with P01): a MAX_TOKENS stop is reported as truncated."""
+    from app.llm import LLMResult
+
+    v1 = _confirm(client)
+    llm = app.config["LLM"]
+    monkeypatch.setattr(llm, "generate", lambda *a, **k: LLMResult(
+        text="| **NR-37** | ok |\n| **NR-38", latency_ms=1, finish_reason="MAX_TOKENS"))
+    r = client.post("/api/generate", json={
+        "prompt": v1["optimized_prompt"], "version": 1, "signature": v1["signature"]})
+    assert r.status_code == 200 and r.get_json()["truncated"] is True
+    assert client.get("/api/stats").get_json()["counts"]["answer_truncated"] == 1
+
+
+def test_gemini_client_reports_finish_reason(monkeypatch):
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp(200, {"candidates": [{
+        "content": {"parts": [{"text": "partial"}]}, "finishReason": "MAX_TOKENS"}]}))
+    out = GeminiClient("KEY", "gemini-test", "https://example.test/v1beta").generate(
+        "s", "u", json_mode=False, timeout=5)
+    assert out.finish_reason == "MAX_TOKENS"

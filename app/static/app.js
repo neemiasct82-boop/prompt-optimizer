@@ -173,9 +173,10 @@
     state.result = data;
     $("answer").innerHTML = renderMarkdown(data.answer);
     $("answer-version").textContent = `Generated from confirmed prompt v${data.version}`;
+    $("answer-truncated").classList.toggle("hidden", !data.truncated);
     setStep("answer");
     show("card-answer");
-    log(`Answer generated from v${data.version}`);
+    log(`Answer generated from v${data.version}`, data.truncated ? "truncated at length limit" : "");
   }
 
   // ---------- actions ----------
@@ -265,7 +266,8 @@
         optimized_prompt: state.current.optimized_prompt,
         tokens: state.current.tokens,
       },
-      answer: state.result && { version: state.result.version, text: state.result.answer },
+      answer: state.result && {
+        version: state.result.version, truncated: !!state.result.truncated, text: state.result.answer },
       timeline: state.timeline,
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });

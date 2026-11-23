@@ -1,7 +1,7 @@
-# spec.md — Prompt Optimizer (v1.1)
+# spec.md — Prompt Optimizer (v1.2)
 
-Status: revised after review (see `docs/spec-review.md`) ·
-Owner: Neemias de Carvalho Tavares · Date: 2026-11-20
+Status: v1.1 revised after review; v1.2 after the live test with P01 (see `docs/spec-review.md`) ·
+Owner: Neemias de Carvalho Tavares · Date: 2026-11-23
 
 ## 1. Objective and AI capability
 
@@ -36,7 +36,7 @@ Evidence base: `docs/evidence/01_Problem_Hypothesis.txt`,
 | Clarification `{status: "clarify"}` | Deliverable, scope or reference date unclear, and fewer than 3 rounds used | One focused question in the user's language, optional 2–4 options, and the gap it resolves. |
 | Confirmation `{status: "confirm"}` | Request is clear, or 3 rounds used | Paraphrase as a yes/no question; optimized prompt; `version`; `signature`; token counts for original and optimized prompts (same model) and the counting method; assumptions made. |
 | Revised confirmation | User declines and explains | Same as confirmation with `version + 1`, reflecting the correction. |
-| Answer | User confirms | Answer text (Markdown) and the `version` it was generated from. |
+| Answer | User confirms | Answer text (Markdown), the `version` it was generated from, and `truncated` (true if the model hit its output length limit). |
 | Error | Invalid input, bad signature, rate limit, provider failure | HTTP 400 / 403 / 429 / 502 with a readable `error` message. |
 
 ## 4. Constraints and edge cases
@@ -53,6 +53,7 @@ Evidence base: `docs/evidence/01_Problem_Hypothesis.txt`,
 - Secrets only in environment variables (`GEMINI_API_KEY`, `APP_SECRET`).
 - Rate limit: 30 API requests per IP per 10 minutes (per process).
 - Provider timeouts: 60 s for analyze/revise, 180 s for answers.
+- Answer output limit: 16,384 tokens (`ANSWER_MAX_TOKENS`).
 
 ## 5. Acceptance criteria
 
@@ -83,3 +84,6 @@ Evidence base: `docs/evidence/01_Problem_Hypothesis.txt`,
   returns HTTP 429.
 - **AC10 Monitoring:** `/healthz` returns status, provider and model;
   `/api/stats` returns request counters including confirm and revise counts.
+- **AC11 Truncated answer (live test):** Given the model stops because of its output
+  length limit, the response has `truncated = true`, the UI warns the user, and
+  `/api/stats` counts `answer_truncated`.

@@ -272,9 +272,14 @@ def revise(client: LLMClient, secret: str, request: str, answers: list[dict], cu
                          latency_ms=result.latency_ms)
 
 
-def generate_answer(client: LLMClient, prompt: str, version: int, *, timeout: int) -> dict[str, Any]:
-    """AC4a: generate the answer from the confirmed prompt version."""
+def generate_answer(client: LLMClient, prompt: str, version: int, *, timeout: int,
+                    max_output_tokens: int = 16384) -> dict[str, Any]:
+    """AC4a: generate the answer from the confirmed prompt version.
+
+    AC11: if the provider stopped because of the output length limit, the answer is
+    flagged as truncated so the UI can warn the user (found in the live test with P01).
+    """
     result = client.generate(GENERATE_SYSTEM, prompt, json_mode=False, timeout=timeout,
-                             max_output_tokens=8192)
+                             max_output_tokens=max_output_tokens)
     return {"answer": result.text, "version": version, "latency_ms": result.latency_ms,
-            "usage": result.usage}
+            "usage": result.usage, "truncated": result.finish_reason == "MAX_TOKENS"}

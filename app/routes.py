@@ -92,12 +92,15 @@ def api_generate():
         return _error("This prompt version was not issued by the server. Please start again.", 403)
     try:
         result = optimizer.generate_answer(llm, data["prompt"], data["version"],
-                                           timeout=settings.generate_timeout_s)
+                                           timeout=settings.generate_timeout_s,
+                                           max_output_tokens=settings.answer_max_tokens)
     except LLMError as exc:
         stats.incr("llm_errors")
         return _error(str(exc), 502)
     g.llm_ms = result.get("latency_ms")
     stats.incr("generate")
+    if result["truncated"]:
+        stats.incr("answer_truncated")
     return jsonify(result)
 
 

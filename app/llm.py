@@ -20,6 +20,7 @@ class LLMResult:
     text: str
     latency_ms: int
     usage: dict = field(default_factory=dict)
+    finish_reason: str = "STOP"
 
 
 class LLMClient(Protocol):
@@ -86,7 +87,8 @@ class GeminiClient:
         text = "".join(p.get("text", "") for p in parts if not p.get("thought"))
         if not text.strip():
             raise LLMError("AI provider returned an empty answer.")
-        return LLMResult(text=text, latency_ms=latency, usage=data.get("usageMetadata", {}))
+        return LLMResult(text=text, latency_ms=latency, usage=data.get("usageMetadata", {}),
+                         finish_reason=candidates[0].get("finishReason", "STOP"))
 
     def count_tokens(self, text: str) -> tuple[int, str]:
         body = {"contents": [{"role": "user", "parts": [{"text": text}]}]}

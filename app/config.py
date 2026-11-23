@@ -22,6 +22,7 @@ class Settings:
     analyze_timeout_s: int
     generate_timeout_s: int
     max_clarify_rounds: int
+    answer_max_tokens: int
 
 
 def load_settings(overrides: dict | None = None) -> Settings:
@@ -55,4 +56,5 @@ def load_settings(overrides: dict | None = None) -> Settings:
         analyze_timeout_s=int(env.get("ANALYZE_TIMEOUT_S", "60")),
         generate_timeout_s=int(env.get("GENERATE_TIMEOUT_S", "180")),
         max_clarify_rounds=int(env.get("MAX_CLARIFY_ROUNDS", "3")),
+        answer_max_tokens=int(env.get("ANSWER_MAX_TOKENS", "16384")),
     )
