@@ -74,6 +74,13 @@ _DATE_BR = re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b")
 # "revisão"/"revision" alone is ambiguous (e.g. "revisão pendente" in the coverage checklist),
 # so only edition wording counts as already requesting the editions used.
 _EDITION_WORDS = re.compile(r"edi[cç][aã]o|edi[cç][oõ]es|edition", re.I)
+# Live test (P01): the model wrote "lista de verificação de cobertura", so a check for the
+# English word "checklist" alone appended a duplicate instruction.
+_CHECKLIST_WORDS = re.compile(
+    r"checklist|lista de verifica[cç][aã]o|verifica[cç][aã]o de cobertura|coverage list|"
+    r"pending review|revis[aã]o pendente",
+    re.I,
+)
 _FULL_COVERAGE = re.compile(
     r"\b(todas as|todos os|demais|all (the )?(remaining )?|every|complete coverage|cobertura completa)\b",
     re.I,
@@ -138,7 +145,7 @@ def wants_full_coverage(model_flag: Any, *texts: str) -> bool:
 
 def ensure_coverage_checklist(prompt: str, needed: bool, portuguese: bool) -> str:
     """AC8: ask for a coverage checklist with three statuses when full coverage is expected."""
-    if not needed or "checklist" in prompt.lower():
+    if not needed or _CHECKLIST_WORDS.search(prompt):
         return prompt
     line = (
         "Inclua ao final um checklist de cobertura com cada item solicitado marcado como "

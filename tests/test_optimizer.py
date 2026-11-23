@@ -67,6 +67,13 @@ def test_coverage_checklist_added_in_user_language_with_three_statuses():
         assert status in prompt
 
 
+def test_checklist_not_duplicated_when_model_wrote_it_in_portuguese():
+    # Live test (P01, session 1): the model's own Portuguese wording was not recognised.
+    prompt = ("Crie uma tabela, acompanhada por uma lista de verificação de cobertura com cada item "
+              "classificado como 'reviewed - match' ou 'pending review'.")
+    assert optimizer.ensure_coverage_checklist(prompt, True, portuguese=True) == prompt
+
+
 # ---------- model output parsing ----------
 
 def test_parse_model_json_accepts_code_fences():
