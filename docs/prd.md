@@ -1,6 +1,6 @@
 # PRD — Prompt Optimizer v1
 
-Owner: Neemias de Carvalho Tavares · 2026-11-20 · Status: built, live test pending
+Owner: Neemias de Carvalho Tavares · 2026-11-23 · Status: built, deployed and tested with P01
 
 **1. Problem.** Occupational safety technicians describe a topic but leave the deliverable
 implicit, so the AI answers a different question and they must revise and ask again. In the
@@ -19,7 +19,7 @@ experience who use AI chat tools for regulation and standards research (Portugue
 | Flow is completed | generate ÷ confirm_shown | ≥ 60% |
 | Transparency | Confirmations showing token counts | 100% |
 
-**4. Core features and acceptance criteria** (full list: `docs/spec.md`, AC1–AC10)
+**4. Core features and acceptance criteria** (full list: `docs/spec.md`, AC1–AC11)
 
 | Feature | Testable acceptance criterion |
 |---|---|
@@ -29,6 +29,7 @@ experience who use AI chat tools for regulation and standards research (Portugue
 | F4 Generate | "Yes" on version *n* → answer from version *n*, no retyping; edited or unsigned prompt → HTTP 403 (AC4a/b) |
 | F5 Token counts | Input tokens for original and optimized prompt, same model; labelled estimate on fallback (AC5) |
 | F6 Domain guards | User's reference date kept + editions requested (AC7); coverage checklist when full coverage requested (AC8) |
+| F7 Truncation warning | Answer cut by the model's length limit → `truncated = true` and a visible warning (AC11, from the live test) |
 
 **5. Out of scope (v1).** User accounts and saved history; verifying the technical accuracy of
 answers; uploading regulation files; measuring follow-up requests saved; payments.

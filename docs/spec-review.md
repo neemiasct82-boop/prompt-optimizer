@@ -18,5 +18,5 @@ Each finding was resolved in spec v1.1.
 
 | # | Observation in the deployed app | Evidence | Change |
 |---|---|---|---|
-| L1 | In session 1 the answer was cut off mid-row at "NR-38" (13,635 characters); the user was not told it was incomplete. | `docs/evidence/live-test/session-1-confirm.json` | Detect `finishReason = MAX_TOKENS`, return `truncated`, warn in the UI, count it in `/api/stats`; raise the answer limit from 8,192 to 16,384 tokens. New **AC11**. |
+| L1 | In session 1 the answer was cut off mid-row at "NR-38" (13,635 characters); the user was not told it was incomplete. The log did not record the finish reason; the output limit is the likely cause. | `docs/evidence/live-test/session-1-confirm.json` | Detect `finishReason = MAX_TOKENS`, return `truncated`, warn in the UI, count it in `/api/stats`; raise the answer limit from 8,192 to 16,384 tokens. New **AC11**. |
 | L2 | The optimized prompt asked for the coverage checklist twice: once in the model's own words ("lista de verificação de cobertura") and once from the guard. | Same file, `confirmed_prompt` | Guard now recognises Portuguese and English checklist wording and the status labels before appending (**AC8**). |

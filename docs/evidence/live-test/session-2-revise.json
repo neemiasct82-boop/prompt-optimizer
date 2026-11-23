@@ -1,0 +1,82 @@
+{
+  "app": "Prompt Optimizer",
+  "exported_at": "2026-11-23T04:52:34.577Z",
+  "request": "como fazer uma tabela demonstrativa para usar dados de NRs e API na apresentação que preciso no trabalho, cruzando dados de pontos restritivos de cada norma comparada ao API?",
+  "clarifications": [
+    {
+      "question": "Quais Normas Regulamentadoras (NRs) e normas da API você precisa comparar na sua apresentação?",
+      "answer": "Um modelo de tabela genérico e adaptável com um exemplo prático"
+    },
+    {
+      "question": "Qual data de referência deve ser considerada para a versão e vigência das NRs e normas da API no exemplo prático da tabela?",
+      "answer": "Usar um exemplo fictício/didático (sem vinculação a datas de vigência)"
+    }
+  ],
+  "confirmed_prompt": {
+    "version": 2,
+    "paraphrase": "Entendi que você deseja ajustar a instrução para que a tabela e a análise comparativa entre as NRs e as normas da API considerem a data de referência de novembro de 2026. Vou atualizar o prompt com essa restrição temporal.",
+    "optimized_prompt": "Desenvolva um modelo genérico e adaptável de tabela comparativa voltado para apresentações profissionais, acompanhado de um exemplo prático que ilustre o cruzamento de pontos restritivos entre Normas Regulamentadoras (NRs) e normas da API (American Petroleum Institute), utilizando como referência as normas e edições em vigor no mês de novembro de 2026.\n\nEscopo e Prioridades:\n- Apresentar a estrutura da tabela comparativa focada em identificar e cruzar pontos restritivos e divergências entre NRs e normas da API.\n- Incluir um exemplo prático preenchido para demonstrar a aplicação da tabela, considerando o cenário normativo de novembro de 2026.\n- Fornecer orientações breves de como adaptar o modelo para diferentes normas e temas operacionais.\n\nFormato:\n- Tabela clara e legível estruturada para slides de apresentação, contendo colunas como: 'Item/Norma NR', 'Item/Norma API', 'Ponto Restritivo / Requisito', 'Análise Comparativa / Divergência' e 'Ação / Recomendação'.\n\nRestrições e Referência Temporal:\n- A análise e os dados comparativos apresentados no exemplo devem tomar estritamente como base a data de referência de novembro de 2026.",
+    "tokens": {
+      "method": "gemini-countTokens",
+      "model": "gemini-3.5-flash",
+      "optimized": 285,
+      "original": 38
+    }
+  },
+  "answer": {
+    "version": 2,
+    "text": "Este documento apresenta um modelo genérico e adaptável de tabela comparativa para apresentações executivas e técnicas, desenvolvido para evidenciar divergências e pontos restritivos entre normas legais e técnicas. \n\nEm seguida, apresenta-se um **exemplo prático** focado no setor de Óleo e Gás, confrontando as **Normas Regulamentadoras (NRs)** brasileiras com os padrões do **API (American Petroleum Institute)**, considerando a vigência normativa de **novembro de 2026**.\n\n---\n\n### 1. Estrutura Genérica do Modelo de Tabela Comparativa\n\nO modelo abaixo foi otimizado para leitura legível em *slides* de apresentação (orientação *landscape* / 16:9), utilizando colunas bem definidas para facilitar a tomada de decisão.\n\n#### **Estrutura Padrão (Template)**\n\n| Item/Norma NR | Item/Norma API | Ponto Restritivo / Requisito | Análise Comparativa / Divergência | Ação / Recomendação |\n| :--- | :--- | :--- | :--- | :--- |\n| **[Norma & Item NR]** | **[Norma & Item API]** | **[Descrição do Requisito/Limite]** | **[Identificação da Restrição/Conflito]** | **[Orientação Operacional/Adequação]** |\n\n---\n\n### 2. Exemplo Prático Aplicado (Referência: Novembro de 2026)\n\n> **Contexto de Referência (Novembro de 2026):** No ambiente legal brasileiro, as NRs possuem caráter compulsório (força de lei), enquanto as normas API representam práticas recomendadas de engenharia mundialmente aceitas. Na ocorrência de divergências, a regra mais restritiva ou a exigência legal soberana (NR) deve prevalecer para fins de conformidade local.\n\n#### **Tabela Comparativa: NR vs. API (Novembro/2026)**\n\n| Item/Norma NR | Item/Norma API | Ponto Restritivo / Requisito | Análise Comparativa / Divergência | Ação / Recomendação |\n| :--- | :--- | :--- | :--- | :--- |\n| **NR-13**<br>(Item 13.5.4 / Anexo IV) | **API 510**<br>(Seção 6.5) | **Prazos Máximos de Inspeção Interna de Vasos de Pressão** | **A NR-13 é mais restritiva.** A NR-13 estabelece prazos máximos fixos (ex: 5 anos para Classe I), enquanto o API 510 permite a extensão dos prazos com base exclusivamente em Metodologia RBI (*Risk-Based Inspection*) e taxa de corrosão residual. | Adotar rigorosamente os prazos máximos da **NR-13**. A metodologia RBI (API 510) pode ser utilizada para antecipar inspeções, mas **não** para ultrapassar o limite temporal legal da NR-13. |\n| **NR-20**<br>(Item 20.6) / **NR-10**<br>(Item 10.5) | **API RP 500** vs. **API RP 505** | **Classificação de Áreas de Atmosferas Explosivas** | **Conflito de Metodologia.** A NR-20/NR-10 exige alinhamento com a codificação IEC/ABNT (Zonas 0, 1 e 2 - API RP 505). O API RP 500 utiliza o sistema norte-americano de Divisões (Classe I, Div 1 e Div 2). | Padronizar todos os prontuários e mapas de classificação de área pelo sistema de **Zonas (API RP 505 / IEC)** para atender à exigência legal brasileira, rejeitando estudos baseados apenas no API RP 500. |\n| **NR-13**<br>(Item 13.5.3) / **NR-20** | **API 653**<br>(Seção 12.3) | **Isenção de Teste Hidrostático após Grandes Reparos em Tanques** | **A NR-13/NR-20 é mais restritiva.** O API 653 permite isentar o teste hidrostático pós-reparo substancial mediante aplicação de ENDs avançados e FFS (*Fitness-for-Service*). A legislação brasileira exige reavaliação formal e aprovação por PLH (Profissional Legalmente Habilitado). | Em caso de dispensa do teste hidrostático via diretrizes do API 653, emitir parecer técnico circunstanciado assinado por **PLH**, formalizando a justificativa técnica no Prontuário para respaldar auditorias do MTE. |\n| **NR-37**<br>(Item 37.14) | **API RP 75**<br>(Seção 4) | **Sistemas de Gestão de Segurança Operacional em Instalações Offshore** | **Sobreposição com especificidades locais.** O API RP 75 estabelece a gestão de SEMS, mas a NR-37 prescreve dimensionamentos mínimos rígidos de CIPAT do mar e regras específicas de comissionamento/auditoria. | Utilizar a estrutura do **API RP 75** para o sistema de gestão global, sobrepondo os requisitos quantitativos e operacionais compulsórios da **NR-37** na operação em águas jurisdicionais brasileiras. |\n\n---\n\n### 3. Orientações para Adaptação do Modelo\n\nPara replicar ou adaptar esta estrutura a diferentes temas, normas ou auditórios, siga o roteiro estruturado abaixo:\n\n1. **Definição do Par Normativo:**\n   * Identifique a norma mandatória/legal local (ex: NRs, ABNT, CONAMA) e a norma técnica/internacional de referência (ex: API, NFPA, ASME, ISO).\n\n2. **Mapeamento dos Pontos de Interseção:**\n   * Selecione apenas os itens onde há **divergência**, **conflito metodológico** ou **exigência adicional**. Evite listar pontos em que as duas normas são idênticas para manter o foco executivo da apresentação.\n\n3. **Aplicação do Princípio da Restritividade (Regra de Ouro):**\n   * Em apresentações de *Compliance* e Risco, destaque sempre qual das normas impõe o critério mais rigoroso (menor limite de tolerância, menor prazo, maior exigência documental).\n\n4. **Formatação Otimizada para *Slides*:**\n   * **Cores:** Use destaques (ex: negrito ou fundos suavizados) para indicar o padrão soberano na coluna \"Análise Comparativa\".\n   * **Objetividade:** Limite a coluna \"Ação / Recomendação\" a verbos no infinitivo/imperativo (ex: *Adotar*, *Padronizar*, *Emitir*), direcionando o foco do espectador para a solução de engenharia ou gestão."
+  },
+  "timeline": [
+    {
+      "t": "2026-11-23T04:49:27.662Z",
+      "event": "Request submitted",
+      "detail": "174 characters"
+    },
+    {
+      "t": "2026-11-23T04:49:34.086Z",
+      "event": "Clarification question 1",
+      "detail": "Quais Normas Regulamentadoras (NRs) e normas da API você precisa comparar na sua apresentação?"
+    },
+    {
+      "t": "2026-11-23T04:50:00.575Z",
+      "event": "Answer given",
+      "detail": "Um modelo de tabela genérico e adaptável com um exemplo prático"
+    },
+    {
+      "t": "2026-11-23T04:50:09.236Z",
+      "event": "Clarification question 2",
+      "detail": "Qual data de referência deve ser considerada para a versão e vigência das NRs e normas da API no exemplo prático da tabela?"
+    },
+    {
+      "t": "2026-11-23T04:50:27.764Z",
+      "event": "Answer given",
+      "detail": "Usar um exemplo fictício/didático (sem vinculação a datas de vigência)"
+    },
+    {
+      "t": "2026-11-23T04:50:46.674Z",
+      "event": "Confirmation shown (v1)",
+      "detail": "38 → 247 tokens"
+    },
+    {
+      "t": "2026-11-23T04:51:51.836Z",
+      "event": "Declined v1",
+      "detail": "use data comparativa referente ao mês de novembro 2026"
+    },
+    {
+      "t": "2026-11-23T04:52:01.001Z",
+      "event": "Confirmation shown (v2)",
+      "detail": "38 → 285 tokens"
+    },
+    {
+      "t": "2026-11-23T04:52:07.740Z",
+      "event": "Confirmed v2",
+      "detail": ""
+    },
+    {
+      "t": "2026-11-23T04:52:28.139Z",
+      "event": "Answer generated from v2",
+      "detail": ""
+    }
+  ]
+}
