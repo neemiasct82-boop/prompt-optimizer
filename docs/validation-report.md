@@ -64,7 +64,13 @@ of the comparisons was not independently verified. Follow-up requests saved were
 
 ## Step 5 — Why now
 
-P01 requested a reference date because standards can change. Her initial prompt omitted it. During the live revision trial, she added November 2026 only after seeing the proposed prompt. This gives the confirmation step a concrete purpose today. The Gemini API also provides a counting endpoint that makes the input-token trade-off visible before generation.
+**A dated comparison changes which edition applies.** Brazil's Ministry of Labour lists two NR-10 texts side by side. The existing text applies through 31 May 2027. The revision under Ordinance 737/2026, published on 1 June 2026, takes effect on 1 June 2027. A technician researching in November 2026 can already find the revised text. A prompt that asks for the applicable edition as of a stated date helps distinguish current requirements from upcoming changes. [1]
+
+**The training gap reaches the point of use.** Microsoft and LinkedIn's 2024 Work Trend Index found that 75% of knowledge workers surveyed used AI at work. The report also found that frequent, proficient users were more likely to receive training specific to prompting and their role. These international data give context for offering guidance inside the tool. P01 provides the evidence specific to this project. [2]
+
+**Clarification needs an explicit step.** A May 2026 study found that the models tested could recognize ambiguity yet seldom asked a clarifying question in standard question answering. For this app, a confirmation screen gives the technician an opportunity to correct the task before generation. In the original manual trial the model explained the standards, while P01 wanted a comparison. [3]
+
+**Local evidence and feasibility.** P01 requested a reference date because standards can change. Her initial prompt omitted it. During the live revision trial, she added November 2026 only after seeing the proposed prompt. This gives the confirmation step a concrete purpose today. The Gemini API also provides a counting endpoint that makes the input-token trade-off visible before generation.
 
 ## Step 6 — Existing alternatives and differentiating angle
 
@@ -124,3 +130,12 @@ paraphrase) because the final answer fits their need better and saves follow-up 
 - OpenAI — Prompt optimizer: https://developers.openai.com/api/docs/guides/prompt-optimizer
 - Prompt-Optimizer (open source): https://sourceforge.net/mirror/prompt-optimizer
 - Google — Gemini API countTokens: https://ai.google.dev/api/tokens
+
+
+## Sources for Step 5
+
+[1] Brazilian Ministry of Labour and Employment. Ordinance 737/2026 and revised NR-10. https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/seguranca-e-saude-no-trabalho/sst-portarias/2026-1/portaria-mte-no-737-nova-nr-10.pdf/view
+
+[2] Microsoft and LinkedIn. 2024 Work Trend Index Annual Report. https://blogs.microsoft.com/blog/2024/05/08/microsoft-and-linkedin-release-the-2024-work-trend-index-on-the-state-of-ai-at-work/
+
+[3] Knowing but Not Showing: LLMs Recognize Ambiguity but Rarely Ask Clarifying Questions. May 2026 preprint. https://arxiv.org/abs/2605.25284
