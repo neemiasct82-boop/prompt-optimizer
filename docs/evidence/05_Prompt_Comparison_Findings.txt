@@ -63,5 +63,5 @@ confirms, the answer is generated from the latest confirmed prompt.
 
 Evidence:
 The P01 review illustrated how feedback clarified the comparison
-direction, priority standards, format, and reference date. The
-automated confirmation flow remains to be tested in the application.
+direction, priority standards, format, and reference date.
+The guided live test is documented separately in the live user test record.

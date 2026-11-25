@@ -1,49 +1,11 @@
-# Reflection — Prompt Optimizer
-
-Neemias de Carvalho Tavares · Graded Mini Project 4.2 · 2026-11-23
-
+# Reflection
 ## What I built
-
-Prompt Optimizer is a web app for people with little prompt-writing experience. When a
-request leaves the deliverable unclear, it asks one focused question at a time. It then
-confirms its understanding as a yes/no question and generates the answer only from the
-prompt the user confirmed. It is live at https://prompt-optimizer-mw8t.onrender.com, runs on
-Flask with the Gemini API, and has GitHub Actions CI with 46 tests.
-
-## Key learnings
-
-1. **The problem was intent, not wording.** P01, an occupational safety technician, did not
-   need nicer phrasing. The AI needed to know the deliverable, the direction of the comparison,
-   the priority NRs and the reference date. She realised her original request was unclear only
-   when she read the rewrite. That moved the product from "rewrite the prompt" to "ask,
-   confirm, then answer".
-2. **My first hypothesis about tokens was wrong.** I started from the idea that better prompts
-   use fewer tokens. In the live test, the optimized prompts were 7.5–9 times longer than the
-   originals (33 → 301 and 38 → 285 tokens). P01 rated the Confirm session 4.5/5 and found
-   the prompt clear, but the higher token count was her main concern. The app is worth using
-   only if the first answer matches the user's intent so she needs fewer follow-up requests,
-   and that is still unmeasured. The UI states this next to the token counts.
-3. **Users' requirements belong in code, not only in the system prompt.** The reference date and
-   the coverage checklist came from P01's feedback. Enforcing them with deterministic guards
-   made them testable. Testing caught two weaknesses in those guards. One was a wording
-   collision ("revisão pendente" hid a missing edition request). The other, from the live
-   test, was a duplicated checklist instruction.
-
-## Challenges
-
-- **Proving "the answer comes from the confirmed prompt".** The server is stateless and cannot
-  trust the browser, so each prompt version is signed with HMAC and edited prompts are
-  rejected. In the live test, both answers came from the version P01 confirmed (v1 and v2).
-- **Silent incompleteness.** P01's first answer stopped mid-row at "NR-38", most likely at the
-  model's output limit (the log did not record the finish reason), and nothing warned her. Long, complete-coverage requests are exactly what this user
-  asks for, so I added truncation detection and a warning, and raised the limit.
-- **Small evidence base.** One participant and two tasks. The validation framework steps in the
-  brief were not enumerated, so I mapped my evidence to a common seven-step structure.
-
-## What I would improve in v2
-
-- **Coverage follow-up** (GitHub issue #1): read the checklist and offer a confirmed follow-up
-  prompt for "pending review" items, which also recovers truncated answers.
-- **Measure what matters:** follow-up requests per task with and without the app, with at
-  least three technicians, to test the "fewer retries" claim directly.
-- **Persist anonymous usage metrics** instead of in-memory counters that reset on restart.
+My starting point was a safety technician’s request about Brazilian regulations and API standards. Her first prompt named the topic, but the answer she wanted was a comparison organized by API clause. I built Prompt Optimizer to ask what the user needs, show a rewritten prompt and wait for confirmation before generating the answer.
+## What the two live sessions taught me
+P01 rated Confirm 4.5/5. She found the prompt clear and detailed and the answer satisfactory. The extra detail came at a cost she noticed: the original request used 33 input tokens and the confirmed prompt used 301. In the guided Revise session, the first rewrite used 247 tokens. After she added November 2026, the confirmed version used 285, compared with 38 for her original request. She did not give that session a separate rating.
+My initial expectation of shorter prompts did not hold for either task. The most useful moment came when P01 read the second confirmation and changed the date before generation. The test captured that correction. It did not measure total tokens per task, the number of follow-up requests saved, or the accuracy of the standards comparison.
+## Engineering challenges
+The browser holds the conversation state. I used a signed prompt version so the server can check that the text submitted for generation matches a version it issued. The logs showed answers generated from v1 and v2 respectively.
+The first answer stopped in the middle of the NR-38 row. Its log contained no finish reason. I added handling for the provider’s output-limit signal, a visible warning and a counter. Raising the output limit gives long answers more room. A separate regression test covers a duplicated checklist instruction when the model already wrote it in Portuguese.
+## What I would change next
+I would test matched tasks with and without the app, counterbalance their order and record answer fit, follow-ups, completion and total token use. The next trial should include at least two additional technicians. I would also let a user review outstanding checklist items and confirm a targeted follow-up before generating more text (issue #1).

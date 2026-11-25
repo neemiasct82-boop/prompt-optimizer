@@ -1,0 +1,17 @@
+Original prompt — English translation
+
+A regulatory standard is a set of rules that helps industry carry out its activities in compliance. There is also an international standard that guides how industry should carry out its activities. It is called API.
+
+Conversation A — English translation of the observed response
+
+That is broadly right, with two details worth clarifying.
+
+Brazilian Regulatory Standards (NRs) are legally mandatory. The Ministry of Labor and Employment issues them under Brazil's labor code. Noncompliance can lead to citations, fines, or suspension of an activity. Common examples in oil and gas include NR-37 (oil platforms), NR-13 (pressure vessels and boilers), NR-10 (electricity), NR-33 (confined spaces), and NR-35 (work at height).
+
+API is the publisher of standards. The American Petroleum Institute is a US association. It publishes product specifications such as API 5CT (casing and tubing), API 6A (wellheads and Christmas trees), API 16A (BOPs), and API 17D (subsea equipment), recommended practices such as API RP 59 (well control) and API RP 75 (safety and environmental management), and standards such as API Std 53 (BOP systems).
+
+The response described API documents as generally voluntary unless required by contract, adopted by a regulator, or incorporated into a company's management system. It cited Petrobras contracts and the ANP's industrial good-practice requirements under SGSO and SGIP, and mentioned API, ISO and IADC as references. It described API standards as US publications used globally, with some harmonized with ISO, citing API 6A / ISO 10423 and API 5CT / ISO 11960.
+
+The response concluded that NRs establish occupational safety obligations and API documents describe established industry practices for equipment and well design, manufacture, testing, and operation.
+
+Test language: Portuguese. This translation records what the model said. Its technical and regulatory claims were not independently verified.

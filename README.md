@@ -38,7 +38,7 @@ Participant P01 used the deployed app in a private window with the real model
 (`gemini-3.5-flash`). She ran both flows: **Confirm** (2 questions → v1 → answer from v1) and
 **Revise** (2 questions → declined v1 → added "November 2026" as the reference date → v2 →
 answer from v2), and rated the Confirm session 4.5/5. The optimized prompts were 7.5–9× longer than her originals (33 → 301 and
-38 → 285 tokens). The value is an answer that matches her intent, not a shorter input. The test found two
+38 → 285 tokens). P01 found the Confirm answer satisfactory. Revise was guided and received no separate rating. Total token use and follow-ups saved were not measured. The test found two
 issues, both fixed with tests: an answer cut off without warning, most likely at the output limit (AC11) and a duplicated checklist
 instruction (AC8). Details: [`docs/evidence/06_Live_User_Test_Record.md`](docs/evidence/06_Live_User_Test_Record.md).
 

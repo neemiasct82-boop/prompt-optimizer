@@ -1,0 +1,50 @@
+{
+  "source_export": "session-1-confirm.json",
+  "source_sha256": "d23e3e142928a06be697386b5ccc72ca8ebd3a8b0c5c5f34c49ead5dafd588e6",
+  "participant": "P01",
+  "language_note": "English extract. Event names and timestamps preserved. Task and correction are paraphrased. Full model output is omitted.",
+  "task": "Compare Brazilian NRs with API standards and identify matches.",
+  "guided_revise": false,
+  "correction": null,
+  "confirmed_version": 1,
+  "confirmed_prompt_token_counts": {
+    "method": "gemini-countTokens",
+    "model": "gemini-3.5-flash",
+    "optimized": 301,
+    "original": 33
+  },
+  "timeline": [
+    {
+      "utc": "2026-11-23T03:59:09.040Z",
+      "event": "Request submitted"
+    },
+    {
+      "utc": "2026-11-23T03:59:13.884Z",
+      "event": "Clarification question 1"
+    },
+    {
+      "utc": "2026-11-23T03:59:39.867Z",
+      "event": "Answer given"
+    },
+    {
+      "utc": "2026-11-23T03:59:45.307Z",
+      "event": "Clarification question 2"
+    },
+    {
+      "utc": "2026-11-23T04:00:08.069Z",
+      "event": "Answer given"
+    },
+    {
+      "utc": "2026-11-23T04:00:15.117Z",
+      "event": "Confirmation shown (v1)"
+    },
+    {
+      "utc": "2026-11-23T04:00:41.334Z",
+      "event": "Confirmed v1"
+    },
+    {
+      "utc": "2026-11-23T04:01:31.204Z",
+      "event": "Answer generated from v1"
+    }
+  ]
+}

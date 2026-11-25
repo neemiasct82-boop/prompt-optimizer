@@ -1,0 +1,58 @@
+{
+  "source_export": "session-2-revise.json",
+  "source_sha256": "691d5e281a51c16953da5cd73ea6619c8727105e7232be2ffcb8d04f585bd0e6",
+  "participant": "P01",
+  "language_note": "English extract. Event names and timestamps preserved. Task and correction are paraphrased. Full model output is omitted.",
+  "task": "Prepare an adaptable comparison table with a worked example for a presentation.",
+  "guided_revise": true,
+  "correction": "Use November 2026 as the reference date.",
+  "confirmed_version": 2,
+  "confirmed_prompt_token_counts": {
+    "method": "gemini-countTokens",
+    "model": "gemini-3.5-flash",
+    "optimized": 285,
+    "original": 38
+  },
+  "timeline": [
+    {
+      "utc": "2026-11-23T04:49:27.662Z",
+      "event": "Request submitted"
+    },
+    {
+      "utc": "2026-11-23T04:49:34.086Z",
+      "event": "Clarification question 1"
+    },
+    {
+      "utc": "2026-11-23T04:50:00.575Z",
+      "event": "Answer given"
+    },
+    {
+      "utc": "2026-11-23T04:50:09.236Z",
+      "event": "Clarification question 2"
+    },
+    {
+      "utc": "2026-11-23T04:50:27.764Z",
+      "event": "Answer given"
+    },
+    {
+      "utc": "2026-11-23T04:50:46.674Z",
+      "event": "Confirmation shown (v1)"
+    },
+    {
+      "utc": "2026-11-23T04:51:51.836Z",
+      "event": "Declined v1"
+    },
+    {
+      "utc": "2026-11-23T04:52:01.001Z",
+      "event": "Confirmation shown (v2)"
+    },
+    {
+      "utc": "2026-11-23T04:52:07.740Z",
+      "event": "Confirmed v2"
+    },
+    {
+      "utc": "2026-11-23T04:52:28.139Z",
+      "event": "Answer generated from v2"
+    }
+  ]
+}

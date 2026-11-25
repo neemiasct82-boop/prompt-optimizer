@@ -1,6 +1,6 @@
 # Idea Validation Report — Prompt Optimizer
 
-Graded Mini Project 4.2 · Neemias de Carvalho Tavares · 2026-11-23 · Version 1.1 (adds live-test results)
+Graded Mini Project 4.2 · Neemias de Carvalho Tavares · 2026-11-23 · Updated 25 November 2026
 
 > **One-line idea.** Prompt Optimizer asks a focused question when a request leaves the
 > deliverable or scope unclear, confirms its understanding with the user, and only then
@@ -41,8 +41,7 @@ a clarifying question can recover.
 |---|---|---|
 | E1 | Problem hypothesis and observed prompt (`01_Problem_Hypothesis.txt`) | Context given, deliverable implicit. Intended task, scope and constraints confirmed with P01. |
 | E2 | Side-by-side review of original vs rewritten prompt (`02_Prompt_Validation.txt`) | Intent match **partial**: reading the rewrite helped P01 see that her original request was unclear. She approved the table format and asked for an explicit reference date "because the information may change over time". |
-| E3 | Manual comparison in Claude, separate conversations (`05_Prompt_Comparison_Findings.txt`, `Comparativo_API_x_NR.pdf`) | Revised prompt → PDF organized by API standard and clause, NR-10/12/13 first, reference date 2026-11-11, source editions, separate sections for "no counterpart" and "not directly comparable". **P01 preferred Response B**, but found it incomplete because not all NRs were listed. |
-
+| E3 | Manual comparison in Claude, separate conversations (`05_Prompt_Comparison_Findings.txt`, `API_NR_Comparator_EN.pdf`) | Revised prompt → PDF organized by API standard and clause, NR-10/12/13 first, reference date 2026-11-11, source editions, separate sections for "no counterpart" and "not directly comparable". **P01 preferred Response B**, but found it incomplete because not all NRs were listed. |
 | E4 | Live test of the deployed app, operated by P01 (`06_Live_User_Test_Record.md`, two session logs, screen recordings) | Both flows completed with the real model. P01 rated the Confirm session 4.5/5 (clear, detailed prompt; satisfactory answer) and raised the higher token count as her concern. In session 2, P01 declined the first confirmation and added "November 2026" as the reference date; the answer came from the corrected v2. Optimized prompts were 7.5–9× longer than the originals. Two defects found and fixed (truncated answer; duplicated checklist instruction). |
 
 **Limits of the evidence.** One participant (n = 1) across three sessions. Technical accuracy
@@ -61,24 +60,11 @@ of the comparisons was not independently verified. Follow-up requests saved were
   More than half of employees given AI tools had to work out how to use them on their own
   (Coda survey, via CIO Dive).
 
-**Models do not reliably ask before answering.** Research reports that state-of-the-art LLMs
-often answer ambiguous requests by assuming one interpretation instead of asking (Zhang et al.,
-arXiv 2410.13788), and that adding clarifying questions improves performance across tasks
-(Kuhn et al., arXiv 2311.09469). A user study found clear benefits when an AI asked follow-up
-questions before writing a one-page document (Tix, arXiv 2407.12017).
+**Relevance to the target user.** The cited surveys provide workplace context. Interviews and Prompt Optimizer sessions involved one Brazilian technician. Her evidence establishes a specific use case. The prevalence of this need among other technicians remains to be measured.
 
 ## Step 5 — Why now
 
-1. **Regulatory change makes the reference date critical in 2026–2027.** The new text of NR-10
-   (Portaria MTE nº 737/2026) was published on 01/06/2026 and enters into force on 01/06/2027;
-   until then, the 2004 text applies (CBIC; uai.com.br). A technician comparing requirements
-   today must say which text she means — exactly the gap P01 raised.
-2. **Usage is now daily, training is not.** Workers have moved from trying AI to using it
-   routinely, but most skills stopped at basic prompting (Section AI survey, via Insurance
-   Business). The gap is in everyday requests, not in developer tooling.
-3. **The building blocks are cheap and available.** LLM APIs return structured JSON and expose
-   token counting (Gemini `countTokens`), so a clarify-confirm-generate loop with transparent
-   token counts can ship as a small web app in a week.
+P01 requested a reference date because standards can change. Her initial prompt omitted it. During the live revision trial, she added November 2026 only after seeing the proposed prompt. This gives the confirmation step a concrete purpose today. The Gemini API also provides a counting endpoint that makes the input-token trade-off visible before generation.
 
 ## Step 6 — Existing alternatives and differentiating angle
 
@@ -109,7 +95,7 @@ paraphrase) because the final answer fits their need better and saves follow-up 
 |---|---|---|
 | T1 Prompt review with P01 | Done (E2) | Partial intent match; feedback adopted (date, table format) |
 | T2 Manual A/B answer comparison | Done (E3) | P01 preferred B (optimized); incomplete NR coverage → AC8 |
-| T3 Live app test, Confirm and Revise flows | **Done (E4)** | Met: P01 completed both flows; answers came from v1 and v2, the versions she confirmed; Confirm session rated 4.5/5. Two defects found and fixed. |
+| T3 Live app test, Confirm and Revise flows | **Done (E4)** | Met: P01 completed both flows; answers came from v1 and v2, the versions she confirmed; Confirm session rated 4.5/5. Guided Revise had no separate rating. Two defects found and fixed. |
 | T4 Live app with ≥ 2 more technicians | Open (v2) | ≥ 2 of 3 rate the answer fit ≥ 4/5; median revisions ≤ 1 |
 | T5 Token measurement | **Done (E4)** | Input tokens 33 → 301 and 38 → 285 (Gemini `countTokens`). Input-token saving **not** supported; the claim was narrowed to fewer follow-up requests, to be measured in T4. |
 
@@ -129,17 +115,11 @@ paraphrase) because the final answer fits their need better and saves follow-up 
 
 ## Sources
 
-- CBIC — "Nova NR-10 … entra em vigor em 2027" (08/07/2026): https://cbic.org.br/nova-nr-10-atualiza-regras-para-gestao-dos-riscos-eletricos-e-entra-em-vigor-em-2027/
-- uai.com.br — "Nova NR-10 2027: o que muda na prática" (21/10/2026): https://www.uai.com.br/networking-e-negocios/2026/10/21/nova-nr-10-2027-o-que-muda-na-pratica-como-as-empresas-devem-se-preparar-desde-agora/
 - Hardware.com.br — Deloitte Gen Z and Millennial Survey 2025 (Brazil): https://www.hardware.com.br/?p=315592
 - Estado de Minas — FDC survey on GenAI at work (06/2025): https://em.com.br/tecnologia/2025/06/7177299-ia-generativa-no-mercado-de-trabalho-no-brasil.html
 - SHRM — Salesforce GenAI Snapshot: https://rss.shrm.org/link/22135/16302148/ai-is-changing-the-skills-employers-want-from-workers.aspx
 - HR Dive — Forrester AIQ: https://www.hrdive.com/news/ai-tools-productivity-forrester-aiq/816274/
 - CIO Dive — Coda survey: https://www.ciodive.com/news/generative-AI-skills-upskilling-training/692196/
-- Insurance Business — Section AI proficiency survey: https://www.insurancebusinessmag.com/us/news/technology/are-your-staff-any-good-at-ai-562775.aspx
-- Zhang et al., "Modeling Future Conversation Turns to Teach LLMs to Ask Clarifying Questions": https://arxiv.org/abs/2410.13788
-- Kuhn et al., "Clarify When Necessary": https://arxiv.org/abs/2311.09469
-- Tix, "Follow-Up Questions Improve Documents Generated by Large Language Models": https://arxiv.org/abs/2407.12017
 - Anthropic — Prompt improver: https://www.anthropic.com/news/prompt-improver
 - OpenAI — Prompt optimizer: https://developers.openai.com/api/docs/guides/prompt-optimizer
 - Prompt-Optimizer (open source): https://sourceforge.net/mirror/prompt-optimizer

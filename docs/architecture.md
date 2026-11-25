@@ -12,28 +12,17 @@
 
 ## Data flow
 
-```
-Browser (state)          Flask API (stateless)              Gemini API
----------------          ---------------------              ----------
-1  request text   --->   POST /api/analyze                  
-                         validate, rate-limit   --->        generateContent (JSON)
-   <--- clarify: one question
-2  answer         --->   POST /api/analyze (+answers) --->  generateContent (JSON)
-                         guards (date, checklist)  --->     countTokens x2
-   <--- confirm: paraphrase, prompt v1, tokens, signature
-3a "No, change X" --->   POST /api/revise  (verify sig) --> generateContent (JSON)
-   <--- confirm: prompt v2 + new signature
-3b "Yes"          --->   POST /api/generate (verify sig) -> generateContent (answer)
-   <--- answer + version used
-```
+1. The browser submits the original request to /api/analyze. Flask validates the request and asks Gemini to identify any missing detail.
+2. The browser displays a focused question. The user’s answer returns to /api/analyze. The server applies the date and coverage rules, counts both prompts and returns the confirmation question and signed prompt version.
+3. Revise sends the correction to /api/revise. A successful revision returns a new prompt version and signature for review.
+4. Confirm sends the accepted text, version and signature to /api/generate. After verification, the server uses that prompt to generate the answer and returns its version.
 
 ## Key design decisions
 
 1. **Stateless server, signed prompt versions.** The server returns each
    optimized prompt with a version number and an HMAC signature
    (`APP_SECRET`). `/api/revise` and `/api/generate` accept only prompts the
-   server itself produced, so the answer is always generated from a prompt the
-   user saw and confirmed, never from an edited or injected one.
+   server itself produced, so changing the prompt text or version without a matching signature fails verification. The browser presents the confirmation action to the user.
 2. **Deterministic guards after the LLM.** Requirements that came from user
    validation (P01) are enforced in code, not only in the system prompt:
    a reference date stated by the user is kept in the optimized prompt, and a

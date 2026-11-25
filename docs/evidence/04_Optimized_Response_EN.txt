@@ -1,0 +1,9 @@
+Conversation B — English evidence summary
+
+The model said it would identify the editions in force on November 11, 2026 and create a comparison table. It delivered the Portuguese PDF Comparativo_API_x_NR.pdf (an English rendering is included as API_NR_Comparator_EN.pdf) and reported 27 directly comparable pairs, seven items without an identified counterpart, and nine cases where direct comparison was unavailable. The first page lists editions and revisions. The table prioritizes NR-10, NR-12, and NR-13, followed by selected comparisons involving NR-33, NR-34, NR-35, and NR-37.
+
+The comparison rows identify the API document and clause, the corresponding NR and clause, the relative restrictiveness, and the reason. Findings may also be marked equivalent or dependent on category or class.
+
+The model reported that some API clause references came from earlier editions or secondary sources and marked them with a dagger. It reported using the base text of API RP 54 without verifying its addendum. It also identified API documents for which it had insufficient clause access and stated that NR-06, NR-15, and NR-20 were omitted. The PDF did not account for every NR requested.
+
+Test language: Portuguese. This is an English summary of the model output and attached PDF. The original PDF is the source artifact. Its clause references and technical conclusions were not independently verified.
